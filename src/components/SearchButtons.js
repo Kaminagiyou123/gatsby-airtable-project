@@ -12,6 +12,18 @@ const SearchButtons = ({ projects, setProjects, setBacktoAll }) => {
     ),
   ]
 
+  const showProjects = (type, typeIndex) => {
+    setIndex(typeIndex)
+    if (type === 'all') {
+      setBacktoAll()
+    } else {
+      const tempProjects = projects.filter(
+        project => project.data.type === type
+      )
+      setProjects(tempProjects)
+    }
+  }
+
   return (
     <Wrapper>
       {types.map((type, typeIndex) => {
@@ -19,6 +31,7 @@ const SearchButtons = ({ projects, setProjects, setBacktoAll }) => {
           <button
             key={typeIndex}
             className={index === typeIndex ? 'active' : undefined}
+            onClick={() => showProjects(type, typeIndex)}
           >
             {type}
           </button>
