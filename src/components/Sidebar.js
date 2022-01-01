@@ -4,9 +4,27 @@ import { MdClose } from 'react-icons/md'
 import { Link } from 'gatsby'
 import { GatsbyContext } from '../context/context'
 const Sidebar = () => {
-  
+  const { isSidebarOpen, links, toggleSidebar } = useContext(GatsbyContext)
   return (
-    <h2>sidebar component</h2>)
+    <Wrapper>
+      <div className="container">
+        <button>
+          <MdClose className="icon" onClick={toggleSidebar} />
+        </button>
+        <div className="links">
+          {links.map((link, index) => {
+            const { url, label, icon } = link
+            return (
+              <Link to={url} key={index} onClick={toggleSidebar}>
+                {icon}
+                {label}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+    </Wrapper>
+  )
 }
 const Wrapper = styled.aside`
   position: fixed;
